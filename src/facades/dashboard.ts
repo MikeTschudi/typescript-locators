@@ -15,4 +15,8 @@ export default class DashboardProcessor implements IItemProcessor {
   templatize(item:IItem): Promise<IItemTemplate> {
     return DashboardModule.templatize(item);
   }
+
+  save(item:IItem): Promise<any> {
+    return DashboardModule.save(item);
+  }
 }

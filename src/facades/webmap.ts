@@ -15,4 +15,7 @@ export default class WebMapProcessor implements IItemProcessor {
   templatize(item:IItem): Promise<IItemTemplate> {
     return WebMapModule.templatize(item);
   }
+  save(item:IItem): Promise<any> {
+    return WebMapModule.save(item);
+  }
 }

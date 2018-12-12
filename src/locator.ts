@@ -62,6 +62,12 @@ function factory(models:IItem[]) {
   return Promise.all(tmplPromises);
 }
 
+function factoryTerse(models:IItem[]) {
+  return Promise.all(models.map((model) => {
+    return ProcessorFactory(model.item.type).templatize(model);
+  }))
+}
+
 moduleLocator(models)
   .then((results) => {
     console.info(`Module Locator Output:`)
@@ -70,7 +76,7 @@ moduleLocator(models)
     })
   })
 
-factory(models)
+factoryTerse(models)
   .then((results) => {
     console.info(`ProcessorFactory Output:`)
     results.forEach((e) => {

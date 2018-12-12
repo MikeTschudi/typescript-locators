@@ -4,3 +4,7 @@ export function templatize(item:IItem) {
   tmpl.resources = ['webmap.png']
   return Promise.resolve(tmpl);
 }
+
+export function save(item:IItem) {
+  return Promise.resolve({success:true});
+}
