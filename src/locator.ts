@@ -1,13 +1,13 @@
-import {IItem, IItemTemplate} from './interfaces';
+import {IItem, IItemTemplate, IItemTypeModule} from './interfaces';
 import * as WebMapModule from './modules/webmap';
 import * as DashboardModule from './modules/dashboard';
 import * as GenericModule from './modules/generic';
 
-interface IModuleMap {
-  [itemType: string]: any;
+interface IItemTypeModuleMap {
+  [itemType: string]: IItemTypeModule;
 }
 
-const moduleMap:IModuleMap = {
+const moduleMap:IItemTypeModuleMap = {
   'web map': WebMapModule,
   'dashboard': DashboardModule
 };
