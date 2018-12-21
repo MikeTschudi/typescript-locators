@@ -1,17 +1,16 @@
-import {IItemBase, IItem, IItemTemplate, ISavedItemTemplate} from '../interfaces';
+import {IItemTemplate, ISavedItemTemplate} from '../interfaces';
 
-export function templatize(base:IItemBase, item:IItem):Promise<IItemTemplate> {
-  const tmpl = {...base, ...item} as IItemTemplate;
-  tmpl.resources = ['webmap.png'];
-  console.log("templatized webmap: " + JSON.stringify(base,null,2));//???
-  return Promise.resolve(tmpl);
+export function templatize(itemTemplate:IItemTemplate):Promise<IItemTemplate> {
+  itemTemplate.resources = ['webmap.png'];
+  itemTemplate.key = "aWebmap";
+  return Promise.resolve(itemTemplate);
 }
 
-export function save(tmpl:IItemTemplate, title:string):Promise<ISavedItemTemplate> {
-  console.log("save webmap...");//???
+export function save(itemTemplate:IItemTemplate, title:string):Promise<ISavedItemTemplate> {
+  console.log("save webmap: " + JSON.stringify(itemTemplate,null,2));//???
   return Promise.resolve({
     success:true,
     label:title,
-    template:tmpl
+    template:itemTemplate
   });
 }

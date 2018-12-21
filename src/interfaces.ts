@@ -1,15 +1,13 @@
-export interface IItemBase {
-  type: string,
-  fcns?: any
-}
-
 export interface IItem {
   item: any,
   data?: any
 }
 
-export interface IItemTemplate extends IItemBase, IItem {
-  resources?: any
+export interface IItemTemplate extends IItem {
+  type: string,
+  key?: string,
+  resources?: any,
+  fcns?: any
 }
 
 export interface ISavedItemTemplate {

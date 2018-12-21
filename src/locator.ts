@@ -1,4 +1,4 @@
-import {IItemBase} from './interfaces';
+import {IItem, IItemTemplate} from './interfaces';
 import * as WebMapModule from './modules/webmap';
 import * as DashboardModule from './modules/dashboard';
 import * as GenericModule from './modules/generic';
@@ -12,22 +12,10 @@ const moduleMap:IModuleMap = {
   'dashboard': DashboardModule
 };
 
-export function locator(type:string) {
-  let item:IItemBase = {
-    type: type,
-    fcns: moduleMap[type.toLowerCase()] || GenericModule
+export function locator(model:IItem):IItemTemplate {
+  return {
+    type: model.item.type,
+    fcns: moduleMap[model.item.type.toLowerCase()] || GenericModule,
+    ...model
   };
-
-  /*
-  switch(type.toLowerCase()) {
-    case 'web map':
-      item.fcns = WebMapModule;
-      break;
-    case 'dashboard':
-      item.fcns = DashboardModule;
-      break;
-  }
-  */
-
-  return item;
 }

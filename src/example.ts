@@ -1,7 +1,7 @@
-import {IItem, ISavedItemTemplate} from './interfaces';
+import {IItem, IItemTemplate, ISavedItemTemplate} from './interfaces';
 import {locator} from './locator';
 
-const models = [
+const models:IItem[] = [
   {
     item: {
       type: 'Dashboard'
@@ -26,8 +26,8 @@ function moduleLocator(models:IItem[]) {
   return new Promise<ISavedItemTemplate[]>(
     resolve => {
       const tmplPromises = models.map((model) => {
-        const itemBase = locator(model.item.type);
-        return itemBase.fcns.templatize(itemBase, model);
+        const itemTemplate:IItemTemplate = locator(model);
+        return itemTemplate.fcns.templatize(itemTemplate);
       });
       Promise.all(tmplPromises)
       .then(
