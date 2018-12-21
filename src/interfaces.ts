@@ -6,7 +6,9 @@ export interface IItem {
 export interface IItemTemplate extends IItem {
   type: string,
   key?: string,
-  resources?: any,
+  resources?: any[],
+  dependencies?: string[],
+  properties?: any,
   fcns?: IItemTypeModule
 }
 
