@@ -13,6 +13,12 @@ const models = [
       type: 'Web Map'
     },
     data: {}
+  },
+  {
+    item: {
+      type: 'Web Mapping Application'
+    },
+    data: {}
   }
 ];
 
@@ -20,16 +26,15 @@ function moduleLocator(models:IItem[]) {
   return new Promise<ISavedItemTemplate[]>(
     resolve => {
       const tmplPromises = models.map((model) => {
-        const module = locator(model.item.type);
-        return module.templatize(model);
+        const itemBase = locator(model.item.type);
+        return itemBase.fcns.templatize(itemBase, model);
       });
       Promise.all(tmplPromises)
       .then(
         templates => {
           const savePromises = templates.map(
             (template, index) => {
-              const module = locator(template.item.type);
-              return module.save(template, "title" + index);
+              return template.fcns.save(template, "title" + index);
             }
           );
           Promise.all(savePromises)
@@ -48,6 +53,7 @@ moduleLocator(models)
     results.forEach((e) => {
       console.info(`Item ${e.label} of type ${e.template.item.type} was ` +
       (e.success ? 'saved' : 'not saved') +
-      ` and has ${e.template.resources.length} resources, first is ${e.template.resources[0]}`);
+      (!e.template.resources ? ' with no resources' :
+      ` and has ${e.template.resources.length} resources, first is ${e.template.resources[0]}`));
     })
   })
